@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Faceless Instagram Mastery – Build a Faceless Instagram Page Using Free AI Tools</title>
+  <meta name="description" content="Learn a step-by-step system to create viral content, grow followers, and unlock brand collaboration opportunities using free AI tools — without showing your face." />
+  <meta name="keywords" content="faceless instagram, AI content creation, instagram course, viral reels, brand collaborations, faceless page" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>" />
+</head>
+<body>
+
+  <!-- Urgency Banner -->
+  <div class="urgency-banner" id="urgency-banner">
+    🔥 Limited Time Launch Offer — <span class="original-price">₹1,999</span> → <span class="offer-price">₹499</span> — Offer ends in <span id="countdown-timer" style="font-weight:800; margin-left:4px;">23:59:59</span>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <span class="brand-icon">🤖</span>
+        AI IG Mastery
+      </a>
+      <ul class="navbar-links">
+        <li><a href="#outcomes">What You'll Learn</a></li>
+        <li><a href="#curriculum">Curriculum</a></li>
+        <li><a href="#bonuses">Bonuses</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="navbar-cta">
+        <button class="btn btn-primary cta-enroll" id="nav-enroll-btn">Get Access — ₹499</button>
+      </div>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#outcomes">What You'll Learn</a>
+    <a href="#curriculum">Curriculum</a>
+    <a href="#bonuses">Bonuses</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#faq">FAQ</a>
+    <button class="btn btn-primary cta-enroll">Get Access — ₹499</button>
+  </div>
+
+  <!-- Auth Modal -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-card glass-card">
+      <button class="modal-close" id="authModalClose">✕</button>
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login">Sign In</button>
+        <button class="modal-tab" data-tab="register">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <form class="modal-form" id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
+        <p class="form-error" id="loginError"></p>
+      </form>
+
+      <!-- Register Form -->
+      <form class="modal-form" id="registerForm" style="display:none;">
+        <div class="form-group">
+          <label for="regName">Full Name</label>
+          <input type="text" id="regName" placeholder="Enter your full name" required />
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email Address</label>
+          <input type="email" id="regEmail" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="regPhone">Phone (Optional)</label>
+          <input type="tel" id="regPhone" placeholder="+91 9876543210" />
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" placeholder="Min 6 characters" required minlength="6" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Create Account & Enroll</button>
+        <p class="form-error" id="registerError"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Payment Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-card glass-card" style="text-align:center; padding:48px 36px;">
+      <div style="font-size:4rem; margin-bottom:16px;">🎉</div>
+      <h2 style="font-size:1.6rem; margin-bottom:8px;">Welcome Aboard!</h2>
+      <p style="color:var(--text-secondary); margin-bottom:24px;">Your enrollment is confirmed. Get ready to build your AI-powered Instagram brand!</p>
+      <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:16px; margin-bottom:24px;">
+        <p style="color:#10b981; font-weight:600;">✓ Payment Successful</p>
+        <p style="color:var(--text-muted); font-size:0.85rem;">You now have lifetime access to all 7 modules + bonus resources</p>
+      </div>
+      <button class="btn btn-primary" onclick="document.getElementById('successModal').classList.remove('active')" style="width:100%;">Start Learning 🚀</button>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-card glass-card">
+      <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('active')">✕</button>
+      <h2 style="font-size:1.3rem; margin-bottom:4px;">Contact Us</h2>
+      <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:24px;">Have questions? Send us a message and we'll get back to you soon.</p>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="contactName">Name</label>
+          <input type="text" id="contactName" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email</label>
+          <input type="email" id="contactEmail" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="contactSubject">Subject</label>
+          <input type="text" id="contactSubject" placeholder="What's this about?" />
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" rows="4" placeholder="Your message..." required style="width:100%; padding:12px 16px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; color:var(--text-primary); font-family:inherit; font-size:0.95rem; resize:vertical; outline:none;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+        <p class="form-error" id="contactError"></p>
+        <p class="form-success" id="contactSuccess"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          Enrollment Open — Limited Seats
+        </div>
+
+        <h1 class="hero-title">
+          Build a <span class="gradient-text">Faceless Instagram</span> Page Using Free AI Tools
+        </h1>
+
+        <p class="hero-subtitle">
+          Learn a step-by-step system to create viral content, grow followers, and unlock brand collaboration opportunities — without showing your face.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg cta-enroll">
+            ✨ Get Instant Access for ₹499
+          </button>
+          <a href="#curriculum" class="btn btn-secondary btn-lg">
+            ▶ Watch Course Preview
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="stat-value" data-count="7" data-suffix="+">0+</div>
+            <div class="stat-label">Modules</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-value" data-count="500" data-suffix="+">0+</div>
+            <div class="stat-label">Viral Hooks</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-value" data-count="100" data-suffix="%">0%</div>
+            <div class="stat-label">Free AI Tools</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-phone">
+          <div class="phone-screen">
+            <div class="phone-header">
+              <div class="phone-avatar">AI</div>
+              <div>
+                <div class="phone-username">ai_faceless_page</div>
+                <div class="phone-handle">12.4K followers</div>
+              </div>
+            </div>
+            <div class="phone-post"></div>
+            <div class="phone-engagement">
+              <span>❤️ 3,847</span>
+              <span>💬 294</span>
+              <span>↗ 1.2K</span>
+            </div>
+          </div>
+        </div>
+        <div class="floating-element">🔥 Trending Reel</div>
+        <div class="floating-element">📈 +340% Reach</div>
+        <div class="floating-element">🤝 Brand Deal</div>
+        <div class="floating-element">💰 Monetized</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Is This For Section -->
+  <section class="who-section" id="who">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">🎯 Who Is This For?</span>
+        <h2 class="section-title">Perfect For <span class="gradient-text">You</span> If You Are…</h2>
+      </div>
+      <div class="who-grid">
+        <div class="who-card glass-card reveal">
+          <span class="who-emoji">🎓</span>
+          <h4>Students</h4>
+          <p>Build a side income while studying with minimal time investment.</p>
+        </div>
+        <div class="who-card glass-card reveal">
+          <span class="who-emoji">🎨</span>
+          <h4>Creators</h4>
+          <p>Expand your reach with faceless pages without revealing your identity.</p>
+        </div>
+        <div class="who-card glass-card reveal">
+          <span class="who-emoji">💼</span>
+          <h4>Freelancers</h4>
+          <p>Add Instagram growth as a premium service for your clients.</p>
+        </div>
+        <div class="who-card glass-card reveal">
+          <span class="who-emoji">🌱</span>
+          <h4>Beginners</h4>
+          <p>No experience needed — we teach everything from scratch using free tools.</p>
+        </div>
+        <div class="who-card glass-card reveal">
+          <span class="who-emoji">🚀</span>
+          <h4>Entrepreneurs</h4>
+          <p>Build digital assets that generate opportunities on autopilot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes Section -->
+  <section class="outcomes" id="outcomes">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">📚 Course Outcomes</span>
+        <h2 class="section-title">Everything You'll <span class="gradient-text">Master</span></h2>
+        <p class="section-subtitle">From zero to a fully operational faceless Instagram brand — here's what you'll achieve after completing the course.</p>
+      </div>
+
+      <div class="outcomes-grid">
+        <div class="outcome-card glass-card reveal">
+          <div class="outcome-icon">🚀</div>
+          <div class="outcome-text">
+            <h4>Start From Scratch</h4>
+            <p>Launch your first Instagram page even if you have zero experience with content creation.</p>
+          </div>
+        </div>
+        <div class="outcome-card glass-card reveal">
+          <div class="outcome-icon">🎬</div>
+          <div class="outcome-text">
+            <h4>Create AI-Powered Videos</h4>
+            <p>Use free AI tools to produce scroll-stopping videos that attract views and followers.</p>
+          </div>
+        </div>
+        <div class="outcome-card glass-card reveal">
+          <div class="outcome-icon">📅</div>
+          <div class="outcome-text">
+            <h4>Build a Content System</h4>
+            <p>Set up a daily production workflow so you never run out of content ideas.</p>
+          </div>
+        </div>
+        <div class="outcome-card glass-card reveal">
+          <div class="outcome-icon">🔥</div>
+          <div class="outcome-text">
+            <h4>Find Viral Opportunities</h4>
+            <p>Identify trending topics and create content with the highest potential for virality.</p>
+          </div>
+        </div>
+        <div class="outcome-card glass-card reveal">
+          <div class="outcome-icon">📊</div>
+          <div class="outcome-text">
+            <h4>Boost Reach & Engagement</h4>
+            <p>Apply proven strategies to increase impressions, saves, shares, and follower growth.</p>
+          </div>
+        </div>
+        <div class="outcome-card glass-card reveal">
+          <div class="outcome-icon">🤝</div>
+          <div class="outcome-text">
+            <h4>Prepare for Brand Deals</h4>
+            <p>Optimize your profile and media kit so brands want to collaborate with you.</p>
+          </div>
+        </div>
+        <div class="outcome-card glass-card reveal">
+          <div class="outcome-icon">💰</div>
+          <div class="outcome-text">
+            <h4>Unlock Monetization Paths</h4>
+            <p>Explore affiliate marketing, sponsorships, and digital product opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum Section -->
+  <section class="curriculum" id="curriculum">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">🗺️ Curriculum</span>
+        <h2 class="section-title">Your Complete <span class="gradient-text">Learning Path</span></h2>
+        <p class="section-subtitle">7 comprehensive modules taking you from niche selection to scaling multiple pages.</p>
+      </div>
+
+      <div class="curriculum-timeline">
+        <div class="module-item reveal">
+          <div class="module-number">01</div>
+          <div class="module-card glass-card">
+            <h3>Niche Selection</h3>
+            <p class="module-subtitle">Find the perfect niche for your faceless page</p>
+            <div class="module-topics">
+              <span class="module-topic-tag">Motivation</span>
+              <span class="module-topic-tag">Facts</span>
+              <span class="module-topic-tag">History</span>
+              <span class="module-topic-tag">Business</span>
+              <span class="module-topic-tag">Luxury</span>
+              <span class="module-topic-tag">Life Lessons</span>
+              <span class="module-topic-tag">AI Stories</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-item reveal">
+          <div class="module-number">02</div>
+          <div class="module-card glass-card">
+            <h3>Content Machine Setup</h3>
+            <p class="module-subtitle">Master the tools and build your production pipeline</p>
+            <div class="module-topics">
+              <span class="module-topic-tag">ChatGPT</span>
+              <span class="module-topic-tag">Gemini</span>
+              <span class="module-topic-tag">Google Flow</span>
+              <span class="module-topic-tag">CapCut</span>
+            </div>
+            <div class="workflow-visual">
+              <span class="workflow-step">💡 Idea</span>
+              <span class="workflow-arrow">→</span>
+              <span class="workflow-step">📝 Script</span>
+              <span class="workflow-arrow">→</span>
+              <span class="workflow-step">🖼️ Images</span>
+              <span class="workflow-arrow">→</span>
+              <span class="workflow-step">🎬 Video</span>
+              <span class="workflow-arrow">→</span>
+              <span class="workflow-step">🎙️ Voiceover</span>
+              <span class="workflow-arrow">→</span>
+              <span class="workflow-step">📤 Upload</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-item reveal">
+          <div class="module-number">03</div>
+          <div class="module-card glass-card">
+            <h3>Viral Content Framework</h3>
+            <p class="module-subtitle">Create content that spreads like wildfire</p>
+            <div class="module-topics">
+              <span class="module-topic-tag">Viral Hooks</span>
+              <span class="module-topic-tag">Retention Techniques</span>
+              <span class="module-topic-tag">Curiosity Loops</span>
+              <span class="module-topic-tag">Storytelling</span>
+              <span class="module-topic-tag">CTA Strategies</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-item reveal">
+          <div class="module-number">04</div>
+          <div class="module-card glass-card">
+            <h3>Daily Posting System</h3>
+            <p class="module-subtitle">Never miss a post with your automated schedule</p>
+            <div class="module-topics">
+              <span class="module-topic-tag">Content Calendar</span>
+              <span class="module-topic-tag">Batch Production</span>
+              <span class="module-topic-tag">Consistency Framework</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-item reveal">
+          <div class="module-number">05</div>
+          <div class="module-card glass-card">
+            <h3>Growth Strategy</h3>
+            <p class="module-subtitle">Scale your followers with data-driven tactics</p>
+            <div class="module-topics">
+              <span class="module-topic-tag">Hashtag Research</span>
+              <span class="module-topic-tag">Trend Analysis</span>
+              <span class="module-topic-tag">Competitor Breakdown</span>
+              <span class="module-topic-tag">Reels Optimization</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-item reveal">
+          <div class="module-number">06</div>
+          <div class="module-card glass-card">
+            <h3>Monetization</h3>
+            <p class="module-subtitle">Turn your audience into revenue streams</p>
+            <div class="module-topics">
+              <span class="module-topic-tag">Brand Outreach</span>
+              <span class="module-topic-tag">Affiliate Marketing</span>
+              <span class="module-topic-tag">Digital Products</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-item reveal">
+          <div class="module-number">07</div>
+          <div class="module-card glass-card">
+            <h3>Scaling</h3>
+            <p class="module-subtitle">Multiply your success across multiple pages</p>
+            <div class="module-topics">
+              <span class="module-topic-tag">Multiple Pages</span>
+              <span class="module-topic-tag">Team Building</span>
+              <span class="module-topic-tag">Outsourcing</span>
+              <span class="module-topic-tag">Automation Systems</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bonuses Section -->
+  <section class="bonuses" id="bonuses">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">🎁 Bonus Resources</span>
+        <h2 class="section-title">Exclusive <span class="gradient-text">Bonuses</span> Included</h2>
+        <p class="section-subtitle">Get instant access to premium templates, scripts, and resources — absolutely free with your enrollment.</p>
+      </div>
+      <div class="bonuses-grid">
+        <div class="bonus-card glass-card reveal"><div class="bonus-icon">🔥</div><h4>500 Viral Hooks</h4><p>Copy-paste hooks proven to grab attention in the first 3 seconds.</p><span class="bonus-value">FREE BONUS</span></div>
+        <div class="bonus-card glass-card reveal"><div class="bonus-icon">💡</div><h4>500 Content Ideas</h4><p>Never run out of post ideas across multiple niches and formats.</p><span class="bonus-value">FREE BONUS</span></div>
+        <div class="bonus-card glass-card reveal"><div class="bonus-icon">📖</div><h4>100 Story Frameworks</h4><p>Battle-tested storytelling templates that keep viewers watching.</p><span class="bonus-value">FREE BONUS</span></div>
+        <div class="bonus-card glass-card reveal"><div class="bonus-icon">🤖</div><h4>AI Prompt Vault</h4><p>Pre-built prompts for ChatGPT, Gemini, and image generation tools.</p><span class="bonus-value">FREE BONUS</span></div>
+        <div class="bonus-card glass-card reveal"><div class="bonus-icon">📋</div><h4>Brand Deal Templates</h4><p>Professional templates to pitch brands and close collaboration deals.</p><span class="bonus-value">FREE BONUS</span></div>
+        <div class="bonus-card glass-card reveal"><div class="bonus-icon">💬</div><h4>Negotiation Scripts</h4><p>Proven scripts to negotiate better rates with brands and sponsors.</p><span class="bonus-value">FREE BONUS</span></div>
+        <div class="bonus-card glass-card reveal"><div class="bonus-icon">🧾</div><h4>Invoice Templates</h4><p>Professional invoicing templates ready for your brand collaborations.</p><span class="bonus-value">FREE BONUS</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section (dynamic from DB) -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">⭐ Student Reviews</span>
+        <h2 class="section-title">What Our Students <span class="gradient-text">Are Saying</span></h2>
+        <p class="section-subtitle">Real experiences from students who enrolled in the course and started their faceless Instagram journey.</p>
+      </div>
+      <div class="testimonials-grid" id="testimonials-container">
+        <!-- Loaded dynamically from API -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">❓ FAQ</span>
+        <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+        <p class="section-subtitle">Got questions? We've got answers. If you need more help, feel free to reach out.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-question" id="faq-q1">Is this course beginner friendly?<span class="faq-toggle">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Absolutely! This course is designed from the ground up for complete beginners. No prior experience with Instagram, content creation, or AI tools is required. We walk you through every single step with clear instructions and demonstrations.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" id="faq-q2">Do I need any paid tools?<span class="faq-toggle">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">No! One of the core principles of this course is that everything can be done using 100% free AI tools. We use ChatGPT (free tier), Gemini, Google Flow, and CapCut — all of which have free versions that are more than sufficient.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" id="faq-q3">How long is the course?<span class="faq-toggle">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">The course contains 7 comprehensive modules covering everything from niche selection to scaling. You can go at your own pace — most students complete the core modules within 2-3 weeks and start seeing results within the first month.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" id="faq-q4">Will I learn monetization?<span class="faq-toggle">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes! Module 6 is entirely dedicated to monetization strategies including brand outreach, affiliate marketing, and digital product creation. Plus, you get bonus templates for brand deals, negotiation scripts, and professional invoices.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" id="faq-q5">Do I need video editing experience?<span class="faq-toggle">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Not at all! We teach you how to use beginner-friendly, free tools like CapCut to create professional-quality videos. The course includes step-by-step tutorials for every part of the video creation process, so even if you've never edited a video before, you'll be creating content by the end of Module 2.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">💎 Special Launch Offer</span>
+        <h2 class="section-title">Invest in Your <span class="gradient-text">Future Today</span></h2>
+        <p class="section-subtitle">Get lifetime access to the complete course, all bonuses, and future updates at an exclusive launch price.</p>
+      </div>
+      <div class="pricing-card-wrapper reveal">
+        <div class="pricing-card">
+          <div class="pricing-badge">🔥 Launch Offer — 75% OFF</div>
+          <div class="pricing-original">₹1,999</div>
+          <div class="pricing-amount gradient-text"><span class="currency">₹</span>499</div>
+          <div class="pricing-period">One-time payment • Lifetime Access</div>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span> 7 Comprehensive Modules</li>
+            <li><span class="check">✓</span> Step-by-Step Video Lessons</li>
+            <li><span class="check">✓</span> 500 Viral Hooks Library</li>
+            <li><span class="check">✓</span> 500 Content Ideas Bank</li>
+            <li><span class="check">✓</span> 100 Story Frameworks</li>
+            <li><span class="check">✓</span> AI Prompt Vault</li>
+            <li><span class="check">✓</span> Brand Deal Templates & Scripts</li>
+            <li><span class="check">✓</span> Invoice Templates</li>
+            <li><span class="check">✓</span> Lifetime Access + Future Updates</li>
+          </ul>
+          <button class="btn btn-primary btn-lg cta-enroll" id="pricing-cta" style="width:100%;">
+            ✨ Start Building Your AI-Powered Instagram Brand Today
+          </button>
+          <div class="pricing-guarantee">🔒 Secure checkout • Instant access after payment</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="final-cta" id="final-cta">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-tag">🚀 Ready to Start?</span>
+        <h2 class="section-title">Start Building Your <span class="gradient-text">AI-Powered Instagram Brand</span> Today</h2>
+        <p class="section-subtitle">Join creators who are building faceless Instagram pages using free AI tools. Your journey starts with a single step.</p>
+        <div style="margin-top: 36px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-primary btn-lg cta-enroll">✨ Get Instant Access for ₹499</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="brand-icon">🤖</span>
+          AI Faceless Instagram Mastery
+        </div>
+        <ul class="footer-links">
+          <li><a href="#" id="footer-contact" onclick="event.preventDefault(); document.getElementById('contactModal').classList.add('active');">Contact</a></li>
+          <li><a href="#" id="footer-privacy">Privacy Policy</a></li>
+          <li><a href="#" id="footer-terms">Terms & Conditions</a></li>
+          <li><a href="#" id="footer-refund">Refund Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">
+          <strong>Disclaimer:</strong> Results vary based on niche, effort, consistency, and execution. This course teaches skills, systems, audience growth strategies, and monetization opportunities. No guaranteed income claims are made. Individual results depend on many factors including but not limited to your effort, business acumen, and market conditions.
+        </p>
+        <p class="footer-copyright">© <span id="current-year">2026</span> AI Faceless Instagram Mastery. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

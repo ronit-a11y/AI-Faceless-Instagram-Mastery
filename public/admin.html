@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — AI Faceless Instagram Mastery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #06060e; --bg2: #0c0c1d; --glass: rgba(255,255,255,0.04);
+      --glass-hover: rgba(255,255,255,0.07); --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15); --text: #f0f0f5; --text2: #a0a0b8;
+      --text3: #6a6a82; --purple: #8b5cf6; --purple-light: #a78bfa;
+      --cyan: #06b6d4; --green: #10b981; --yellow: #f59e0b; --red: #ef4444;
+      --radius: 12px; --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    html { font-size: 15px; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    a { color: var(--purple-light); text-decoration: none; }
+
+    /* Login Screen */
+    .login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+    .login-card { background: var(--glass); border: 1px solid var(--border); border-radius: 20px; padding: 48px 40px; width: 100%; max-width: 420px; backdrop-filter: blur(20px); }
+    .login-card h1 { font-size: 1.5rem; margin-bottom: 8px; text-align: center; }
+    .login-card .subtitle { color: var(--text3); text-align: center; margin-bottom: 32px; font-size: 0.9rem; }
+    .login-card .brand { text-align: center; margin-bottom: 24px; font-size: 2rem; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem; transition: border var(--transition); outline: none; }
+    .form-group input:focus { border-color: var(--purple); }
+    .btn-login { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--purple), var(--cyan)); border: none; border-radius: 10px; color: #fff; font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity var(--transition); }
+    .btn-login:hover { opacity: 0.9; }
+    .login-error { color: var(--red); font-size: 0.85rem; text-align: center; margin-top: 12px; display: none; }
+
+    /* Dashboard Layout */
+    .dashboard { display: none; }
+    .dashboard.active { display: flex; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar { width: 260px; background: var(--bg2); border-right: 1px solid var(--border); padding: 24px 0; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 100; transition: transform var(--transition); }
+    .sidebar-brand { padding: 0 24px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; }
+    .sidebar-brand .icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--purple), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .sidebar-nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; }
+    .sidebar-nav button { width: 100%; padding: 12px 16px; background: transparent; border: none; border-radius: 10px; color: var(--text2); font-family: inherit; font-size: 0.9rem; font-weight: 500; text-align: left; cursor: pointer; transition: all var(--transition); display: flex; align-items: center; gap: 10px; }
+    .sidebar-nav button:hover { background: var(--glass-hover); color: var(--text); }
+    .sidebar-nav button.active { background: rgba(139,92,246,0.12); color: var(--purple-light); }
+    .sidebar-footer { padding: 16px 12px; border-top: 1px solid var(--border); }
+    .sidebar-footer button { width: 100%; padding: 12px 16px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.15); border-radius: 10px; color: var(--red); font-family: inherit; font-size: 0.9rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all var(--transition); }
+    .sidebar-footer button:hover { background: rgba(239,68,68,0.15); }
+
+    /* Main Content */
+    .main { flex: 1; margin-left: 260px; padding: 32px; }
+    .page-header { margin-bottom: 32px; }
+    .page-header h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+    .page-header p { color: var(--text3); font-size: 0.9rem; }
+
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: all var(--transition); }
+    .stat-card:hover { border-color: var(--border-hover); background: var(--glass-hover); }
+    .stat-card .stat-icon { font-size: 1.5rem; margin-bottom: 12px; }
+    .stat-card .stat-number { font-size: 2rem; font-weight: 800; margin-bottom: 4px; background: linear-gradient(135deg, var(--purple-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-card .stat-label { color: var(--text3); font-size: 0.82rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Tables */
+    .card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
+    .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .card-header h3 { font-size: 1.05rem; font-weight: 600; }
+    .card-body { padding: 0; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th { padding: 12px 20px; text-align: left; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text3); border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+    td { padding: 14px 20px; font-size: 0.9rem; color: var(--text2); border-bottom: 1px solid rgba(255,255,255,0.03); }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* Badges */
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; }
+    .badge-success { background: rgba(16,185,129,0.12); color: var(--green); }
+    .badge-warning { background: rgba(245,158,11,0.12); color: var(--yellow); }
+    .badge-danger { background: rgba(239,68,68,0.12); color: var(--red); }
+    .badge-info { background: rgba(139,92,246,0.12); color: var(--purple-light); }
+
+    /* Small buttons */
+    .btn-sm { padding: 6px 14px; border-radius: 8px; font-family: inherit; font-size: 0.78rem; font-weight: 600; border: none; cursor: pointer; transition: all var(--transition); }
+    .btn-action { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); color: var(--purple-light); }
+    .btn-action:hover { background: rgba(139,92,246,0.2); }
+    .btn-danger { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: var(--red); }
+    .btn-danger:hover { background: rgba(239,68,68,0.2); }
+    .btn-success { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: var(--green); }
+    .btn-success:hover { background: rgba(16,185,129,0.2); }
+
+    /* Section pages */
+    .section-page { display: none; }
+    .section-page.active { display: block; }
+
+    /* Add form */
+    .add-form { padding: 24px; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); display: none; }
+    .add-form.visible { display: block; }
+    .add-form .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 12px; }
+    .add-form input, .add-form textarea { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 0.88rem; outline: none; }
+    .add-form input:focus, .add-form textarea:focus { border-color: var(--purple); }
+    .add-form textarea { resize: vertical; min-height: 80px; }
+
+    /* Empty state */
+    .empty-state { padding: 48px; text-align: center; color: var(--text3); }
+    .empty-state .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+
+    /* Toast */
+    .toast { position: fixed; top: 24px; right: 24px; padding: 14px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 500; z-index: 9999; opacity: 0; transform: translateY(-10px); transition: all 0.3s ease; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast-success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: var(--green); }
+    .toast-error { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: var(--red); }
+
+    /* Pagination */
+    .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; }
+    .pagination button { padding: 8px 14px; background: var(--glass); border: 1px solid var(--border); border-radius: 8px; color: var(--text2); font-family: inherit; font-size: 0.82rem; cursor: pointer; transition: all var(--transition); }
+    .pagination button:hover { border-color: var(--purple); color: var(--text); }
+    .pagination button.active { background: rgba(139,92,246,0.15); border-color: var(--purple); color: var(--purple-light); }
+    .pagination button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    /* Mobile toggle */
+    .mobile-sidebar-toggle { display: none; position: fixed; top: 16px; left: 16px; z-index: 200; width: 40px; height: 40px; border-radius: 10px; background: var(--glass); border: 1px solid var(--border); color: var(--text); font-size: 1.2rem; cursor: pointer; }
+
+    /* Loading */
+    .loading { display: flex; align-items: center; justify-content: center; padding: 40px; color: var(--text3); }
+    .spinner { width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--purple); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; padding: 16px; padding-top: 60px; }
+      .mobile-sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+
+    ::selection { background: rgba(139,92,246,0.3); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.3); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Login Screen -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="brand">🤖</div>
+      <h1>Admin Dashboard</h1>
+      <p class="subtitle">AI Faceless Instagram Mastery</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="admin@aifacelessig.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter password" required />
+        </div>
+        <button type="submit" class="btn-login">Sign In</button>
+        <p class="login-error" id="loginError"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="mobile-sidebar-toggle" id="sidebarToggle">☰</button>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <span class="icon">🤖</span> Admin Panel
+      </div>
+      <nav class="sidebar-nav">
+        <button class="active" data-section="overview">📊 Overview</button>
+        <button data-section="users">👥 Users</button>
+        <button data-section="payments">💳 Payments</button>
+        <button data-section="contacts">📬 Contacts</button>
+        <button data-section="testimonials">⭐ Testimonials</button>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logoutBtn">🚪 Logout</button>
+        <a href="/" style="display:block; text-align:center; margin-top:12px; font-size:0.82rem; color:var(--text3);">← Back to Website</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+      <!-- OVERVIEW -->
+      <div class="section-page active" id="page-overview">
+        <div class="page-header">
+          <h2>Dashboard Overview</h2>
+          <p>Real-time stats and recent activity</p>
+        </div>
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-number" id="statUsers">-</div><div class="stat-label">Total Users</div></div>
+          <div class="stat-card"><div class="stat-icon">🎓</div><div class="stat-number" id="statEnrollments">-</div><div class="stat-label">Enrollments</div></div>
+          <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-number" id="statRevenue">-</div><div class="stat-label">Revenue</div></div>
+          <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-number" id="statConversion">-</div><div class="stat-label">Conversion Rate</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h3>Recent Payments</h3></div>
+          <div class="card-body"><table><thead><tr><th>User</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody id="recentPaymentsTable"></tbody></table></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h3>Recent Contacts</h3></div>
+          <div class="card-body"><table><thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Status</th><th>Date</th></tr></thead><tbody id="recentContactsTable"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- USERS -->
+      <div class="section-page" id="page-users">
+        <div class="page-header"><h2>Users</h2><p>All registered users</p></div>
+        <div class="card">
+          <div class="card-body"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Status</th><th>Joined</th></tr></thead><tbody id="usersTable"></tbody></table></div>
+          <div class="pagination" id="usersPagination"></div>
+        </div>
+      </div>
+
+      <!-- PAYMENTS -->
+      <div class="section-page" id="page-payments">
+        <div class="page-header"><h2>Payments</h2><p>All payment transactions</p></div>
+        <div class="card">
+          <div class="card-body"><table><thead><tr><th>User</th><th>Order ID</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody id="paymentsTable"></tbody></table></div>
+          <div class="pagination" id="paymentsPagination"></div>
+        </div>
+      </div>
+
+      <!-- CONTACTS -->
+      <div class="section-page" id="page-contacts">
+        <div class="page-header"><h2>Contact Submissions</h2><p>Messages from the contact form</p></div>
+        <div class="card">
+          <div class="card-body"><table><thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Status</th><th>Actions</th></tr></thead><tbody id="contactsTable"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- TESTIMONIALS -->
+      <div class="section-page" id="page-testimonials">
+        <div class="page-header"><h2>Testimonials</h2><p>Manage student reviews shown on the website</p></div>
+        <div class="card">
+          <div class="card-header">
+            <h3>All Testimonials</h3>
+            <button class="btn-sm btn-action" id="toggleAddForm">+ Add New</button>
+          </div>
+          <div class="add-form" id="addTestimonialForm">
+            <div class="form-row">
+              <input type="text" id="tName" placeholder="Name" />
+              <input type="text" id="tRole" placeholder="Role (e.g. Student)" />
+              <input type="number" id="tRating" placeholder="Rating (1-5)" min="1" max="5" value="5" />
+            </div>
+            <textarea id="tText" placeholder="Testimonial text..."></textarea>
+            <div style="margin-top:12px; display:flex; gap:8px;">
+              <button class="btn-sm btn-success" id="submitTestimonial">Add Testimonial</button>
+              <button class="btn-sm btn-action" id="cancelTestimonial">Cancel</button>
+            </div>
+          </div>
+          <div class="card-body"><table><thead><tr><th>Name</th><th>Role</th><th>Rating</th><th>Text</th><th>Visible</th><th>Actions</th></tr></thead><tbody id="testimonialsTable"></tbody></table></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    const API = '';
+    let token = localStorage.getItem('admin_token');
+
+    // ---- Helpers ----
+    async function api(url, options = {}) {
+      const headers = { 'Content-Type': 'application/json', ...options.headers };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      const res = await fetch(API + url, { ...options, headers });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Request failed');
+      return data;
+    }
+
+    function showToast(msg, type = 'success') {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = `toast toast-${type} show`;
+      setTimeout(() => { t.classList.remove('show'); }, 3000);
+    }
+
+    function formatDate(d) {
+      if (!d) return '-';
+      return new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function formatAmount(paise) {
+      return `₹${(paise / 100).toLocaleString('en-IN')}`;
+    }
+
+    // ---- Auth ----
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errEl = document.getElementById('loginError');
+      errEl.style.display = 'none';
+      try {
+        const data = await api('/api/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({
+            email: document.getElementById('loginEmail').value,
+            password: document.getElementById('loginPassword').value
+          })
+        });
+        token = data.token;
+        localStorage.setItem('admin_token', token);
+        showDashboard();
+      } catch (err) {
+        errEl.textContent = err.message;
+        errEl.style.display = 'block';
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      token = null;
+      localStorage.removeItem('admin_token');
+      document.getElementById('dashboard').classList.remove('active');
+      document.getElementById('loginScreen').style.display = 'flex';
+    });
+
+    // ---- Show Dashboard ----
+    async function showDashboard() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').classList.add('active');
+      loadOverview();
+    }
+
+    // ---- Navigation ----
+    document.querySelectorAll('.sidebar-nav button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar-nav button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const section = btn.dataset.section;
+        document.querySelectorAll('.section-page').forEach(p => p.classList.remove('active'));
+        document.getElementById(`page-${section}`).classList.add('active');
+
+        // Load data
+        if (section === 'overview') loadOverview();
+        else if (section === 'users') loadUsers(1);
+        else if (section === 'payments') loadPayments(1);
+        else if (section === 'contacts') loadContacts();
+        else if (section === 'testimonials') loadTestimonials();
+
+        // Close mobile sidebar
+        document.getElementById('sidebar').classList.remove('open');
+      });
+    });
+
+    // Mobile sidebar toggle
+    document.getElementById('sidebarToggle').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open');
+    });
+
+    // ---- Overview ----
+    async function loadOverview() {
+      try {
+        const { stats } = await api('/api/admin/dashboard');
+        document.getElementById('statUsers').textContent = stats.totalUsers;
+        document.getElementById('statEnrollments').textContent = stats.totalEnrollments;
+        document.getElementById('statRevenue').textContent = stats.totalRevenueFormatted;
+        const rate = stats.totalUsers > 0 ? ((stats.totalEnrollments / stats.totalUsers) * 100).toFixed(1) : '0';
+        document.getElementById('statConversion').textContent = rate + '%';
+
+        // Recent payments
+        const pt = document.getElementById('recentPaymentsTable');
+        pt.innerHTML = stats.recentPayments.length ? stats.recentPayments.map(p => `
+          <tr>
+            <td>${p.user_name || p.user_email || '-'}</td>
+            <td>${formatAmount(p.amount)}</td>
+            <td><span class="badge ${p.status === 'paid' ? 'badge-success' : p.status === 'failed' ? 'badge-danger' : 'badge-warning'}">${p.status}</span></td>
+            <td>${formatDate(p.created_at)}</td>
+          </tr>`).join('') : '<tr><td colspan="4" style="text-align:center; padding:24px; color:var(--text3);">No payments yet</td></tr>';
+
+        // Recent contacts
+        const ct = document.getElementById('recentContactsTable');
+        ct.innerHTML = stats.recentContacts.length ? stats.recentContacts.map(c => `
+          <tr>
+            <td>${c.name}</td>
+            <td>${c.email}</td>
+            <td>${c.subject || '-'}</td>
+            <td><span class="badge ${c.is_read ? 'badge-success' : 'badge-info'}">${c.is_read ? 'Read' : 'New'}</span></td>
+            <td>${formatDate(c.created_at)}</td>
+          </tr>`).join('') : '<tr><td colspan="5" style="text-align:center; padding:24px; color:var(--text3);">No contacts yet</td></tr>';
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    // ---- Users ----
+    async function loadUsers(page = 1) {
+      try {
+        const data = await api(`/api/admin/users?page=${page}&limit=15`);
+        const tb = document.getElementById('usersTable');
+        tb.innerHTML = data.users.map(u => `
+          <tr>
+            <td>${u.name}</td>
+            <td>${u.email}</td>
+            <td>${u.phone || '-'}</td>
+            <td><span class="badge ${u.is_enrolled ? 'badge-success' : 'badge-warning'}">${u.is_enrolled ? 'Enrolled' : 'Free'}</span></td>
+            <td>${formatDate(u.created_at)}</td>
+          </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;padding:24px;">No users</td></tr>';
+        renderPagination('usersPagination', data, loadUsers);
+      } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    // ---- Payments ----
+    async function loadPayments(page = 1) {
+      try {
+        const data = await api(`/api/admin/payments?page=${page}&limit=15`);
+        const tb = document.getElementById('paymentsTable');
+        tb.innerHTML = data.payments.map(p => `
+          <tr>
+            <td>${p.user_name || p.user_email || '-'}</td>
+            <td style="font-size:0.78rem;font-family:monospace;">${p.razorpay_order_id || '-'}</td>
+            <td>${formatAmount(p.amount)}</td>
+            <td><span class="badge ${p.status === 'paid' ? 'badge-success' : p.status === 'failed' ? 'badge-danger' : 'badge-warning'}">${p.status}</span></td>
+            <td>${formatDate(p.created_at)}</td>
+          </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;padding:24px;">No payments</td></tr>';
+        renderPagination('paymentsPagination', data, loadPayments);
+      } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    // ---- Contacts ----
+    async function loadContacts() {
+      try {
+        const data = await api('/api/admin/contacts');
+        const tb = document.getElementById('contactsTable');
+        tb.innerHTML = data.contacts.map(c => `
+          <tr>
+            <td>${c.name}</td>
+            <td>${c.email}</td>
+            <td>${c.subject || '-'}</td>
+            <td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.message}</td>
+            <td><span class="badge ${c.is_read ? 'badge-success' : 'badge-info'}">${c.is_read ? 'Read' : 'New'}</span></td>
+            <td>${!c.is_read ? `<button class="btn-sm btn-action" onclick="markRead('${c.id}')">Mark Read</button>` : '✓'}</td>
+          </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;padding:24px;">No contacts yet</td></tr>';
+      } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    async function markRead(id) {
+      try {
+        await api(`/api/admin/contacts/${id}/read`, { method: 'PATCH' });
+        showToast('Marked as read');
+        loadContacts();
+      } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    // ---- Testimonials ----
+    document.getElementById('toggleAddForm').addEventListener('click', () => {
+      document.getElementById('addTestimonialForm').classList.toggle('visible');
+    });
+    document.getElementById('cancelTestimonial').addEventListener('click', () => {
+      document.getElementById('addTestimonialForm').classList.remove('visible');
+    });
+
+    document.getElementById('submitTestimonial').addEventListener('click', async () => {
+      try {
+        await api('/api/admin/testimonials', {
+          method: 'POST',
+          body: JSON.stringify({
+            name: document.getElementById('tName').value,
+            role: document.getElementById('tRole').value,
+            rating: parseInt(document.getElementById('tRating').value) || 5,
+            text: document.getElementById('tText').value
+          })
+        });
+        showToast('Testimonial added!');
+        document.getElementById('addTestimonialForm').classList.remove('visible');
+        document.getElementById('tName').value = '';
+        document.getElementById('tRole').value = '';
+        document.getElementById('tRating').value = '5';
+        document.getElementById('tText').value = '';
+        loadTestimonials();
+      } catch (err) { showToast(err.message, 'error'); }
+    });
+
+    async function loadTestimonials() {
+      try {
+        const data = await api('/api/admin/testimonials');
+        const tb = document.getElementById('testimonialsTable');
+        tb.innerHTML = data.testimonials.map(t => `
+          <tr>
+            <td>${t.name}</td>
+            <td>${t.role || '-'}</td>
+            <td>${'★'.repeat(t.rating)}${'☆'.repeat(5 - t.rating)}</td>
+            <td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${t.text}</td>
+            <td><span class="badge ${t.is_visible ? 'badge-success' : 'badge-warning'}">${t.is_visible ? 'Yes' : 'No'}</span></td>
+            <td style="display:flex;gap:6px;">
+              <button class="btn-sm btn-action" onclick="toggleVisibility('${t.id}', ${t.is_visible ? 0 : 1})">${t.is_visible ? 'Hide' : 'Show'}</button>
+              <button class="btn-sm btn-danger" onclick="deleteTestimonial('${t.id}')">Delete</button>
+            </td>
+          </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;padding:24px;">No testimonials</td></tr>';
+      } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    async function toggleVisibility(id, visible) {
+      try {
+        await api(`/api/admin/testimonials/${id}`, { method: 'PATCH', body: JSON.stringify({ is_visible: visible }) });
+        showToast(visible ? 'Testimonial visible' : 'Testimonial hidden');
+        loadTestimonials();
+      } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    async function deleteTestimonial(id) {
+      if (!confirm('Delete this testimonial?')) return;
+      try {
+        await api(`/api/admin/testimonials/${id}`, { method: 'DELETE' });
+        showToast('Testimonial deleted');
+        loadTestimonials();
+      } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    // ---- Pagination Helper ----
+    function renderPagination(containerId, data, loadFn) {
+      const el = document.getElementById(containerId);
+      if (data.totalPages <= 1) { el.innerHTML = ''; return; }
+      let html = `<button ${data.page <= 1 ? 'disabled' : ''} onclick="(${loadFn.name})(${data.page - 1})">← Prev</button>`;
+      for (let i = 1; i <= data.totalPages; i++) {
+        html += `<button class="${i === data.page ? 'active' : ''}" onclick="(${loadFn.name})(${i})">${i}</button>`;
+      }
+      html += `<button ${data.page >= data.totalPages ? 'disabled' : ''} onclick="(${loadFn.name})(${data.page + 1})">Next →</button>`;
+      el.innerHTML = html;
+    }
+
+    // ---- Init ----
+    if (token) {
+      api('/api/auth/me').then(() => showDashboard()).catch(() => {
+        token = null;
+        localStorage.removeItem('admin_token');
+      });
+    }
+  </script>
+</body>
+</html>

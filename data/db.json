@@ -1,0 +1,167 @@
+{
+  "users": [
+    {
+      "id": "b68c1722-6cc1-4e17-a0ca-b057cc114f8a",
+      "name": "Admin",
+      "email": "admin@aifacelessig.com",
+      "phone": null,
+      "password": "$2a$10$KhHbmlysgGOy4GMdeM7Tueo8qkJtNL56VN9e93tpyX9eO2IPOT6/a",
+      "is_enrolled": 1,
+      "enrolled_at": "2026-06-18T19:03:02.088Z",
+      "created_at": "2026-06-18T19:03:02.088Z"
+    },
+    {
+      "id": "4bee5104-8875-4d90-9214-24eeab48d87d",
+      "name": "ronit",
+      "email": "ronitgoswami167@gmail.com",
+      "phone": null,
+      "password": "$2a$10$8f7loRnwfL.EKFxc2ZhHIePcUNEhFa2.BLqcar6tWZNt.Glo4PdgO",
+      "is_enrolled": 0,
+      "enrolled_at": null,
+      "created_at": "2026-06-18T19:05:11.798Z"
+    }
+  ],
+  "payments": [
+    {
+      "id": "f2fff3e5-9938-42d9-8ac9-efff1f09c1be",
+      "user_id": "4bee5104-8875-4d90-9214-24eeab48d87d",
+      "razorpay_order_id": "order_mock_e0f89d5d-60b",
+      "razorpay_payment_id": "pay_mock_1781809511861",
+      "razorpay_signature": "mock_signature_dev",
+      "amount": 49900,
+      "currency": "INR",
+      "status": "failed",
+      "created_at": "2026-06-18T19:05:11.852Z"
+    },
+    {
+      "id": "80d72a03-2ad4-4a2b-a4b1-37e76a658ee0",
+      "user_id": "4bee5104-8875-4d90-9214-24eeab48d87d",
+      "razorpay_order_id": "order_mock_a465adba-16b",
+      "razorpay_payment_id": "pay_mock_1781809517544",
+      "razorpay_signature": "mock_signature_dev",
+      "amount": 49900,
+      "currency": "INR",
+      "status": "failed",
+      "created_at": "2026-06-18T19:05:17.520Z"
+    },
+    {
+      "id": "d873f727-e986-4010-ba7d-2935ef0e1a4f",
+      "user_id": "4bee5104-8875-4d90-9214-24eeab48d87d",
+      "razorpay_order_id": "order_mock_bddb3f49-3c1",
+      "razorpay_payment_id": "pay_mock_1781809522842",
+      "razorpay_signature": "mock_signature_dev",
+      "amount": 49900,
+      "currency": "INR",
+      "status": "failed",
+      "created_at": "2026-06-18T19:05:22.827Z"
+    },
+    {
+      "id": "7f3ec61b-f8cb-4012-aefc-a1dc89be2143",
+      "user_id": "4bee5104-8875-4d90-9214-24eeab48d87d",
+      "razorpay_order_id": "order_mock_d8ed0c28-5f9",
+      "razorpay_payment_id": "pay_mock_1781809538946",
+      "razorpay_signature": "mock_signature_dev",
+      "amount": 49900,
+      "currency": "INR",
+      "status": "failed",
+      "created_at": "2026-06-18T19:05:38.926Z"
+    },
+    {
+      "id": "47ca4294-e737-4dbc-9a0f-865579ec6fc4",
+      "user_id": "4bee5104-8875-4d90-9214-24eeab48d87d",
+      "razorpay_order_id": "order_mock_4b603cd9-69d",
+      "razorpay_payment_id": "pay_mock_1781809543614",
+      "razorpay_signature": "mock_signature_dev",
+      "amount": 49900,
+      "currency": "INR",
+      "status": "failed",
+      "created_at": "2026-06-18T19:05:43.602Z"
+    },
+    {
+      "id": "da3539c4-84d7-4211-b28f-e803e36b5776",
+      "user_id": "4bee5104-8875-4d90-9214-24eeab48d87d",
+      "razorpay_order_id": "order_mock_96e95e19-849",
+      "razorpay_payment_id": "pay_mock_1781809551050",
+      "razorpay_signature": "mock_signature_dev",
+      "amount": 49900,
+      "currency": "INR",
+      "status": "failed",
+      "created_at": "2026-06-18T19:05:51.046Z"
+    },
+    {
+      "id": "2d3a4d79-4c30-4e81-9166-d762aef3d7b0",
+      "user_id": "4bee5104-8875-4d90-9214-24eeab48d87d",
+      "razorpay_order_id": "order_mock_b7663292-996",
+      "razorpay_payment_id": "pay_mock_1781810039092",
+      "razorpay_signature": "mock_signature_dev",
+      "amount": 49900,
+      "currency": "INR",
+      "status": "failed",
+      "created_at": "2026-06-18T19:13:59.088Z"
+    },
+    {
+      "id": "a34b8395-891d-477a-b9ef-32e94dc19ed1",
+      "user_id": "4bee5104-8875-4d90-9214-24eeab48d87d",
+      "razorpay_order_id": "order_mock_63f338c3-75c",
+      "razorpay_payment_id": "pay_mock_1781810335947",
+      "razorpay_signature": "mock_signature_dev",
+      "amount": 49900,
+      "currency": "INR",
+      "status": "failed",
+      "created_at": "2026-06-18T19:18:55.941Z"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "8b641bd7-60f0-413f-a244-94d869e2bdd9",
+      "name": "to",
+      "email": "by@gmail.com",
+      "subject": "hello",
+      "message": "chupppp",
+      "is_read": 1,
+      "created_at": "2026-06-18T19:18:41.653Z"
+    },
+    {
+      "id": "13a1c1d5-162b-46e4-a6cf-15207cb9aa7f",
+      "name": "Test User",
+      "email": "test@example.com",
+      "subject": "Testing",
+      "message": "Hello from test!",
+      "is_read": 0,
+      "created_at": "2026-06-18T19:25:14.992Z"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "72fcc6b3-d902-436e-9939-73ad2456d2e7",
+      "name": "Arjun Mehta",
+      "role": "College Student",
+      "rating": 5,
+      "text": "I had zero experience with Instagram. Within 3 weeks of following the system, I had my first 1K followers. The AI tools section alone is worth the entire course price!",
+      "avatar_url": "testimonial_1.png",
+      "is_visible": 1,
+      "created_at": "2026-06-18T19:03:01.867Z"
+    },
+    {
+      "id": "f8b25b40-249d-46ee-b257-c6759e07c94c",
+      "name": "Rohit Verma",
+      "role": "Aspiring Creator",
+      "rating": 5,
+      "text": "Best investment I've made. The viral hooks library and the brand deal templates are incredibly practical. I've already started getting collaboration inquiries!",
+      "avatar_url": "testimonial_3.png",
+      "is_visible": 1,
+      "created_at": "2026-06-18T19:03:01.869Z"
+    },
+    {
+      "id": "a6a54cd8-3127-485b-8efa-ce6fd71f7c08",
+      "name": "Sneha Gupta",
+      "role": "Marketing Student",
+      "rating": 5,
+      "text": "I was skeptical about running a faceless page, but this course showed me it's absolutely possible. The step-by-step approach makes it so easy to follow along.",
+      "avatar_url": "testimonial_4.png",
+      "is_visible": 1,
+      "created_at": "2026-06-18T19:03:01.869Z"
+    }
+  ],
+  "analytics": []
+}
